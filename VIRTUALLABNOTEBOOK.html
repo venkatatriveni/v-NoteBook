@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .notebook-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1,
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        label,
+        textarea,
+        input[type="date"] {
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+    </style>
+    <title>Virtual Lab Notebook</title>
+</head>
+
+<body>
+    <div class="notebook-container">
+        <h1>Virtual Lab Notebook</h1>
+        <form id="labForm">
+            <label for="experimentTitle">Experiment Title:</label>
+            <input type="text" id="experimentTitle" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="observations">Observations:</label>
+            <textarea id="observations" rows="5" required></textarea>
+
+            <button type="button" id="saveButton">Save Entry</button>
+        </form>
+
+        <div class="entries">
+            <h2>Your Entries:</h2>
+            <ul id="entryList"></ul>
+        </div>
+    </div>
+
+    <script>
+        const labForm = document.getElementById('labForm');
+        const saveButton = document.getElementById('saveButton');
+        const entryList = document.getElementById('entryList');
+
+        saveButton.addEventListener('click', saveEntry);
+
+        function saveEntry() {
+            const experimentTitle = document.getElementById('experimentTitle').value;
+            const date = document.getElementById('date').value;
+            const observations = document.getElementById('observations').value;
+
+            const entryItem = document.createElement('li');
+            entryItem.innerHTML = `
+        <h3>${experimentTitle}</h3>
+        <p>Date: ${date}</p>
+        <p>Observations:</p>
+        <p>${observations}</p>
+    `;
+
+            entryList.appendChild(entryItem);
+            labForm.reset();
+        }
+
+    </script>
+</body>
+
+</html>
